@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecretCoder - Login</title>
+
+    <!-- Favicon -->
+    <link href="img/icon.png" rel="icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Navbar Styles */
+        .navbar {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar-brand {
+            text-decoration: none;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 25px 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #333;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #fb873f;
+        }
+
+        .navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            margin-top: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-item {
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #fb873f;
+            color: white;
+        }
+
+        /* Login Form Styles */
+        body {
+            background-color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid #eee;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 1.5rem;
+        }
+
+        .custom-field {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .input:focus {
+            border-color: #fb873f;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(251, 135, 63, 0.2);
+        }
+
+        .placeholder {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: white;
+            padding: 0 5px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: #fb873f;
+            border-color: #fb873f;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #fa7526;
+            border-color: #fa7526;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        #message {
+            color: #22c55e;
+            margin-bottom: 1rem;
+        }
+
+        #error {
+            color: #ef4444;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav .nav-link {
+                padding: 10px 15px;
+            }
+            
+            .navbar-collapse {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <div class="container">
+            <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+                <img src="img/icon.png" alt="SecretCoder Logo" height="50">
+                <span class="m-0 fw-bold" style="font-size: 25px;">Secret<span style="color: #fb873f;">Coder</span></span>
+            </a>
+            
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ms-auto p-4 p-lg-0">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">ABOUT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="courses.html" class="nav-link">COURSES</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">PAGES</a>
+                        <div class="dropdown-menu fade-down m-0">
+                            <a href="team.html" class="dropdown-item">Our Team</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">CONTACT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.html" class="nav-link active">
+                            <i class="fa fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div id="google_translate_element"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Login Section -->
+    <div class="login-container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>Your Next Job is Just a Step Away!</h3>
+            </div>
+            <div class="card-body">
+                <div id="message"></div>
+                <div id="error"></div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" onsubmit="event.preventDefault(); loginUser();" class="px-4 py-3">
+                    <div class="custom-field">
+                        <input id="login-email" type="email" class="input" required />
+                        <span class="placeholder">Email</span>
+                    </div>
+                    <div class="custom-field">
+                        <input id="login-password" type="password" class="input" required />
+                        <span class="placeholder">Password</span>
+                    </div>
+                    <div class="mb-3">
+                        <a href="#" onclick="forgotPass()" class="text-decoration-none">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="button" onclick="toggleForms()" class="btn btn-secondary">Sign Up</button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="registerForm" onsubmit="event.preventDefault(); registerUser();" class="px-4 py-3" style="display: none;">
+                    <div class="custom-field">
+                        <input id="reg-name" type="text" class="input" required />
+                        <span class="placeholder">Full Name</span>
+                    </div>
+                    <div class="custom-field">
+                        <input id="reg-email" type="email" class="input" required />
+                        <span class="placeholder">Email</span>
+                    </div>
+                    <div class="custom-field">
+                        <input id="reg-password" type="password" class="input" required />
+                        <span class="placeholder">Password</span>
+                    </div>
+                    <div class="custom-field">
+                        <input id="reg-phone" type="tel" class="input" required />
+                        <span class="placeholder">Phone Number</span>
+                    </div>
+                    <div class="custom-field">
+                        <input id="reg-job-profile" type="text" class="input" required />
+                        <span class="placeholder">Job Profile</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="button" onclick="toggleForms()" class="btn btn-secondary">Back to Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAOT3orlBywzimVGFN-pxkr17GxT6FHlk0",
+            authDomain: "resume-84589.firebaseapp.com",
+            databaseURL: "https://resume-84589-default-rtdb.firebaseio.com",
+            projectId: "resume-84589",
+            storageBucket: "resume-84589.appspot.com",
+            messagingSenderId: "809356285054",
+            appId: "1:809356285054:web:29ad53f657e81e022bf42f",
+            measurementId: "G-D8B1072ZZJ"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const database = getDatabase(app);
+
+        // Make functions available globally
+        window.registerUser = async () => {
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const phone = document.getElementById('reg-phone').value;
+            const jobProfile = document.getElementById('reg-job-profile').value;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: name });
+
+                const userRef = ref(database, 'users/' + userCredential.user.uid);
+                await set(userRef, {
+                    username: name,
+                    email: email,
+                    phone: phone,
+                    jobProfile: jobProfile,
+                    uid: userCredential.user.uid
+                });
+
+                document.getElementById('message').innerText = "Registration successful! Welcome, " + name;
+                toggleForms();
+            } catch (error) {
+                document.getElementById('error').innerText = "Error: " + error.message;
+                console.error("Registration error:", error);
+            }
+        };
+
+        window.loginUser = async () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                document.getElementById('message').innerText = "Login successful! Welcome back, " + (userCredential.user.displayName || "User");
+                window.location.replace("courses.html");
+            } catch (error) {
+                document.getElementById('error').innerText = "Login failed: " + error.message;
+            }
+        };
+
+        window.forgotPass = () => {
+            const email = document.getElementById('login-email').value;
+            if (!email) {
+                alert("Please enter your email address.");
+                return;
+            }
+            sendPasswordResetEmail(auth, email)
+                .then(() => alert("Password reset email sent."))
+                .catch((error) => alert("Error: " + error.message));
+        };
+    </script>
+
+    <script>
+        function toggleForms() {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const message = document.getElementById('message');
+            const error = document.getElementById('error');
+
+            loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+            registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
+            message.innerText = '';
+            error.innerText = '';
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- MDB UI Kit JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.js"></script>
+</body>
+</html>

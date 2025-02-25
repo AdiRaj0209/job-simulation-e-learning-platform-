@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Consulting Job Simulation</title>
+   
+        <!-- Favicon -->
+        <link href="img/icon.png" rel="icon">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+        <!-- Libraries Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.5.0/mdb.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+       
+/*** Navbar ***/
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    margin-right: 30px;
+    padding: 25px 0;
+    color: #FFFFFF;
+    font-size: 15px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+@media (max-width: 991.98px) {
+    .navbar-light .navbar-nav .nav-link {
+        margin-right: 0;
+        padding: 10px 0;
+    }
+
+    .navbar-light .navbar-nav {
+        border-top: 1px solid #EEEEEE;
+    }
+}
+
+.navbar-light .navbar-brand,
+.navbar-light a.btn {
+    height: 75px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--dark);
+    font-weight: 500;
+}
+
+.navbar-light.sticky-top {
+    top: -100px;
+    transition: .5s;
+}
+
+.navbar-toggler-icon {
+    color: #fb873f;
+}
+
+.navbar-toggler {
+    border: 2px solid #fb873f;
+}
+
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+    }
+
+    .navbar .dropdown-menu.fade-down {
+        top: 100%;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        top: 100%;
+        transform: rotateX(0deg);
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
+}
+
+       
+        .dropdown-menu {
+    margin-top: 0;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #fb873f;
+    color: white;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.75rem;
+    margin-right: 1rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        background: white;
+        padding: 1rem 0;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.75rem 1.5rem;
+    }
+
+    .dropdown-menu {
+        border: none;
+        box-shadow: none;
+        padding-left: 1.5rem;
+    }
+
+    .navbar-brand {
+        padding: 1rem;
+    }
+}
+
+/* Fix for Google Translate element */
+#google_translate_element {
+    padding: 1.5rem 1rem;
+}
+
+@media (max-width: 991.98px) {
+    #google_translate_element {
+        padding: 0.75rem 1.5rem;
+    }
+}
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+       /* Header Styles */
+       header {
+        background: #FFAD00; /* Fixed missing semicolon */
+        color: #fff;
+        padding: 40px 20px; /* Increased padding for better spacing */
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly deeper shadow for depth */
+        font-size: 1.5rem; /* Bigger font for readability */
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+    
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 30px 15px;
+        font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+}
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .intro, .assignment-brief, .task, .result, .certificate {
+            background-color: #fff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro, .assignment-brief {
+            text-align: center;
+        }
+
+        .assignment-brief {
+            border-top: 3px solid #4b6cb7;
+            padding-top: 20px;
+        }
+
+        button {
+            background-color: #FFAD00;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        button:hover {
+            background-color: #f77f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:disabled {
+            background-color: #d1d1d1;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .task ul {
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        .task li {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            width: 0;
+            background-color: #2ecc71;
+            border-radius: 15px;
+            transition: width 1s ease-in-out;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .certificate {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .certificate h3 {
+            font-size: 24px;
+            color: #4b6cb7;
+            margin-bottom: 20px;
+        }
+
+        .certificate button {
+            background-color: #2ecc71;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate button:hover {
+            background-color: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            .task button {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+
+            .task li {
+                font-size: 14px;
+            }
+
+            .certificate h3 {
+                font-size: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+      <!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+    <div class="container">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <img src="img/icon.png" alt="SecretCoder Logo" height="50">
+            <span class="m-0 fw-bold" style="font-size: 25px;">Secret<span style="color: #fb873f;">Coder</span></span>
+        </a>
+        
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav ms-auto p-4 p-lg-0">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">HOME</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link active">COURSES</a>
+                </li>
+                <li class="nav-item">
+                    <a href="jobsim.html" class="nav-link active">JOB SIMULATION</a>
+                </li>
+               
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">
+                        <i class="fa fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <div id="google_translate_element" class="nav-link"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <header>
+        <h1>Global Consulting Solutions - Virtual Job Simulation</h1>
+    </header>
+
+    <div class="container">
+        <!-- Virtual Job Simulation Introduction -->
+        <div class="intro">
+            <h2>Welcome to Global Consulting Solutions</h2>
+            <p>As a Junior Management Consultant, you will work on client projects that involve data analysis, problem-solving, and crafting actionable solutions. Let’s get started!</p>
+        </div>
+
+        <!-- Assignment Brief -->
+        <div class="assignment-brief">
+            <h3>Assignment: Retail Client Sales Improvement</h3>
+            <p>Your client, a retail business, is facing a decline in sales for one of their product categories. You have been asked to analyze sales data and recommend actions to improve performance.</p>
+            <p>Download the data and start analyzing it.</p>
+            <a href="#" download="sales_data.csv">
+                <button onclick="downloadCSV()">Download Sales Data</button>
+            </a>
+        </div>
+
+        <!-- Data Analysis Task -->
+        <div class="task">
+            <h4>Your Task</h4>
+            <ul>
+                <li>Analyze the data for key trends.</li>
+                <li>Identify potential problems contributing to the decline in sales.</li>
+                <li>Prepare a report with your findings and proposed solutions.</li>
+            </ul>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar" id="progressBar">
+                <span id="progress"></span>
+            </div>
+
+            <!-- Loading Screen -->
+            <div class="loading" id="loading">Starting your analysis...</div>
+        </div>
+
+        <!-- Questions Section -->
+        <div id="question1" style="display: block;">
+            <h4>Question 1: What was the highest sales revenue for a single product?</h4>
+            <input type="number" id="userAnswer1" placeholder="Enter your answer" />
+            <button onclick="submitAnswer(1)">Submit Answer</button>
+            <div id="answerResult1" style="display:none;"></div>
+        </div>
+
+        <div id="question2" style="display: none;">
+            <h4>Question 2: What was the total sales volume for the "Apparel" category?</h4>
+            <input type="number" id="userAnswer2" placeholder="Enter your answer" disabled />
+            <button onclick="submitAnswer(2)" disabled>Submit Answer</button>
+            <div id="answerResult2" style="display:none;"></div>
+        </div>
+
+        <div id="question3" style="display: none;">
+            <h4>Question 3: What is the average sales revenue for the "Footwear" category?</h4>
+            <input type="number" id="userAnswer3" placeholder="Enter your answer" disabled />
+            <button onclick="submitAnswer(3)" disabled>Submit Answer</button>
+            <div id="answerResult3" style="display:none;"></div>
+        </div>
+
+        <div id="question4" style="display: none;">
+            <h4>Question 4: What was the sales revenue for the "Watch" on 2024-01-01?</h4>
+            <input type="number" id="userAnswer4" placeholder="Enter your answer" disabled />
+            <button onclick="submitAnswer(4)" disabled>Submit Answer</button>
+            <div id="answerResult4" style="display:none;"></div>
+        </div>
+
+        <!-- Question 5 - Multiple Choice Quiz -->
+        <div id="question5" style="display: none;">
+            <h4>Question 5: What is the best approach to increasing sales in the "Electronics" category?</h4>
+            <div>
+                <input type="radio" id="answerA" name="question5" value="A">
+                <label for="answerA">Lowering prices without any marketing strategy</label>
+            </div>
+            <div>
+                <input type="radio" id="answerB" name="question5" value="B">
+                <label for="answerB">Ignoring customer preferences and trends</label>
+            </div>
+            <div>
+                <input type="radio" id="answerC" name="question5" value="C">
+                <label for="answerC"> Implementing digital marketing, offering bundle deals, and expanding online presence</label>
+            </div>
+            <button onclick="submitAnswer(5)">Submit Answer</button>
+            <div id="answerResult5" style="display: none;"></div>
+        </div>
+
+        <!-- Certificate Section -->
+        <div class="certificate" id="certificate">
+            <h3>Congratulations! You have completed the simulation.</h3>
+            <button onclick="downloadCertificate()">Download Certificate</button>
+        </div>
+    </div>
+
+   <script>
+        const salesData = {
+            highestRevenue: 9200, // Highest sales revenue
+            apparelVolume: 990, // Total sales volume for "Apparel"
+            footwearAvgRevenue: 5533.33, // Average sales revenue for "Footwear"
+            watchRevenue: 3000, // Sales revenue for "Watch" on 2024-01-01
+            bestApproach: 'C' // Correct answer for Question 5
+        };
+    
+        let progress = 0;
+        let questionsAnswered = 0;
+    
+        // Function to submit the answer for each question
+        function submitAnswer(questionNumber) {
+            let userAnswer;
+            let answerResult;
+            let submitButton;
+    
+            if (questionNumber === 5) {
+                // Handle the multiple choice question (Question 5)
+                const selectedOption = document.querySelector('input[name="question5"]:checked');
+                userAnswer = selectedOption ? selectedOption.value : null;
+                answerResult = document.getElementById('answerResult5');
+                submitButton = document.querySelector('#question5 button');
+            } else {
+                userAnswer = parseFloat(document.getElementById(`userAnswer${questionNumber}`).value);
+                answerResult = document.getElementById(`answerResult${questionNumber}`);
+                submitButton = document.querySelector(`#question${questionNumber} button`);
+            }
+    
+            // Validation for question 5 (multiple choice)
+            if (questionNumber === 5 && !userAnswer) {
+                alert('Please select an option.');
+                return;
+            } else if (isNaN(userAnswer) && questionNumber !== 5) {
+                alert('Please enter a valid number.');
+                return;
+            }
+    
+            let correctAnswer;
+            if (questionNumber === 1) {
+                correctAnswer = salesData.highestRevenue;
+            } else if (questionNumber === 2) {
+                correctAnswer = salesData.apparelVolume;
+            } else if (questionNumber === 3) {
+                correctAnswer = salesData.footwearAvgRevenue;
+            } else if (questionNumber === 4) {
+                correctAnswer = salesData.watchRevenue;
+            } else if (questionNumber === 5) {
+                correctAnswer = salesData.bestApproach; // Correct answer for Question 5 is 'B'
+            }
+    
+            // Check if the user's answer is correct
+            if (userAnswer === correctAnswer || (questionNumber === 5 && userAnswer === correctAnswer)) {
+                answerResult.textContent = "Correct!";
+                answerResult.classList.remove('incorrect');
+                answerResult.classList.add('correct');
+                submitButton.disabled = true;
+    
+                // Increment progress after answering correctly
+                questionsAnswered++;
+                progress = (questionsAnswered / 5) * 100;
+                document.getElementById("progress").style.width = progress + "%";
+    
+                // Show the next question immediately after answering correctly
+                if (questionNumber < 5) {
+                    enableNextQuestion(questionNumber + 1);
+                }
+    
+                // If all questions are answered, show the certificate button
+                if (questionsAnswered === 5) {
+                    document.getElementById("certificate").style.display = "block";
+                }
+            } else {
+                answerResult.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+                answerResult.classList.remove('correct');
+                answerResult.classList.add('incorrect');
+            }
+    
+            answerResult.style.display = "block";
+        }
+    
+        // Enable the next question's input field and button
+        function enableNextQuestion(questionNumber) {
+            const nextQuestion = document.getElementById(`question${questionNumber}`);
+            if (nextQuestion && nextQuestion.style.display === "none") {
+                nextQuestion.style.display = "block";
+    
+                const nextInput = nextQuestion.querySelector('input');
+                const nextButton = nextQuestion.querySelector('button');
+    
+                if (nextInput) {
+                    nextInput.disabled = false;  // Enable the input field
+                }
+    
+                if (nextButton) {
+                    nextButton.disabled = false;  // Enable the submit button
+                }
+            }
+        }
+    
+        
+
+
+// Show the button when the course is marked complete
+document.getElementById("completion-checkbox").addEventListener("change", function() {
+    const btn = document.getElementById("certificate-btn");
+    btn.style.display = this.checked ? "block" : "none";
+});
+
+// Function to get current date in format: Month DD, YYYY
+function getCurrentDate() {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date().toLocaleDateString("en-US", options);
+}
+
+function generateCertificate(participantName, simulationTitle, completionDate) {
+    // Load jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Certificate Title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text("Certificate of Completion", 105, 30, null, null, "center");
+
+    // Add participant name
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(16);
+    doc.text(`This is to certify that`, 105, 50, null, null, "center");
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text(participantName, 105, 65, null, null, "center");
+
+    // Add course title
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(14);
+    doc.text(`has successfully completed`, 105, 80, null, null, "center");
+
+    doc.setFont("helvetica", "bold");
+    doc.text(simulationTitle, 105, 95, null, null, "center");
+
+    // Completion date
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(12);
+    doc.text(`Date of Completion: ${completionDate}`, 105, 115, null, null, "center");
+
+    // Download the certificate
+    doc.save(`Certificate_${participantName}.pdf`);
+}
+
+function getCurrentDate() {
+    const today = new Date();
+    return today.toLocaleDateString();
+}
+
+function downloadCertificate() {
+    const participantName = prompt("Enter your name for the certificate:");
+    if (!participantName) {
+        alert("Please enter your name to generate the certificate.");
+        return;
+    }
+
+    const simulationTitle = "Global Consulting Solutions - Virtual Job Simulation";
+    const completionDate = getCurrentDate();
+
+    generateCertificate(participantName, simulationTitle, completionDate);
+}
+
+        function downloadCSV() {
+            const salesData = [
+                ["Date", "Product", "Category", "Sales Revenue", "Sales Volume"],
+                ["2024-01-01", "Shoes", "Footwear", 5000, 120],
+                ["2024-01-01", "Watch", "Accessories", 3000, 90],
+                ["2024-01-02", "Jacket", "Apparel", 7000, 200],
+                ["2024-01-02", "T-Shirt", "Apparel", 3500, 150],
+                ["2024-01-03", "Shoes", "Footwear", 6000, 130],
+                ["2024-01-03", "Watch", "Accessories", 2500, 80],
+                ["2024-01-04", "Sneakers", "Footwear", 4500, 110],
+                ["2024-01-04", "Handbag", "Accessories", 5200, 95],
+                ["2024-01-05", "Jeans", "Apparel", 5800, 170],
+                ["2024-01-05", "Belt", "Accessories", 1200, 50],
+                ["2024-01-06", "Running Shoes", "Footwear", 6200, 140],
+                ["2024-01-06", "Hat", "Accessories", 1900, 65],
+                ["2024-01-07", "Sweater", "Apparel", 8000, 220],
+                ["2024-01-07", "Scarf", "Accessories", 1600, 70],
+                ["2024-01-08", "Sandals", "Footwear", 3000, 100],
+                ["2024-01-08", "Backpack", "Accessories", 4700, 130],
+                ["2024-01-09", "Dress", "Apparel", 9200, 250],
+                ["2024-01-09", "Sunglasses", "Accessories", 3600, 110],
+                ["2024-01-10", "Boots", "Footwear", 8500, 180],
+                ["2024-01-10", "Gloves", "Accessories", 1400, 55],
+            ];
+        
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + salesData.map(row => row.join(",")).join("\n");
+        
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "expanded_sales_data.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+    </script>
+
+</body>
+
+</html>
